@@ -1,6 +1,7 @@
 import multiprocessing
 
 from constants.colors import Colors
+from constants.user_inputs import UserInputs
 from screen_capture_agent import ScreenCaptureAgent
 
 
@@ -19,11 +20,12 @@ if __name__ == "__main__":
 
         user_input = input().strip().lower()
 
-        if user_input == 'quit' or user_input == 'q':
+        if user_input == UserInputs.QUIT_COMMAND or user_input == UserInputs.QUIT_KEY:
             if screen_agent.capture_process is not None:
                 screen_agent.capture_process.terminate()
+
             break
-        elif user_input == 'run' or user_input == 'r':
+        elif user_input == UserInputs.RUN_COMMAND or user_input == UserInputs.RUN_KEY:
             if screen_agent.capture_process is not None:
                 print(f'{Colors.YELLOW}WARNING:{Colors.DEFAULT} Capture process is running.')
                 continue
@@ -35,7 +37,7 @@ if __name__ == "__main__":
             )
             screen_agent.capture_process.start()
             screen_agent.capture_process.join(1)
-        elif user_input == 'stop' or user_input == 's':
+        elif user_input == UserInputs.STOP_COMMAND or user_input == UserInputs.STOP_KEY:
             if screen_agent.capture_process is None:
                 print(f'{Colors.YELLOW}WARNING:{Colors.DEFAULT} Capture process is not running.')
                 continue
