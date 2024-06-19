@@ -37,12 +37,12 @@ class ScreenCaptureAgent:
                 ]
 
                 self.formatted_img_health = cv.cvtColor(self.img_health, cv.COLOR_BGR2RGB) if self.settings['isRgbModeSelected'] else cv.cvtColor(self.img_health, cv.COLOR_BGR2HSV)
-                rgb_model = RgbModel(114, 145, 30, 57, 27, 57)
+                rgb_model = RgbModel(105, 145, 23, 57, 23, 57)
                 hp = rgb_match(self.formatted_img_health, rgb_model)
                 trigger_value = self.settings['triggerValue']
 
                 if hp < trigger_value:
-                    # pyautogui.press(self.settings['targetKeyCap'])
+                    #pyautogui.press(self.settings['targetKeyCap'])
                     frequency = 2500  # Set Frequency To 2500 Hertz
                     duration = 10  # Set Duration To 1000 ms == 1 second
                     winsound.Beep(frequency, duration)
@@ -55,7 +55,7 @@ class ScreenCaptureAgent:
                     cv.putText(hp_monitor, "Health: " + str(hp), (25, 100), cv.FONT_HERSHEY_PLAIN, 5, (0, 0, 255), 3, cv.LINE_AA)
                     #cv.imshow('Computer vision', main_monitor) # Shows screenshot in small desktop window
                     cv.imshow("Health bar", hp_monitor)
-                    #cv.setWindowProperty("Health bar", cv.WND_PROP_TOPMOST, 1)
+                    cv.setWindowProperty("Health bar", cv.WND_PROP_TOPMOST, 1)
 
                 cv.waitKey(self.settings['monitoringThresholdMs'])  # Zero parameter waits for any key. It's like pause button. 1 is a 1 ms delay. Every 1 ms it check if any key is pressed.
 
