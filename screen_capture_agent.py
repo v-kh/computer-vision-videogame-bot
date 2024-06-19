@@ -3,6 +3,7 @@ import mss
 import pyautogui
 import cv2 as cv
 import numpy as np
+import winsound
 
 from Models.rgb_model import RgbModel
 from constants.default_values import DefaultValues
@@ -41,12 +42,19 @@ class ScreenCaptureAgent:
                     # Convert from rgb to bgr. Looks like for sct.grab(monitor). Apps in bgr, method in rgb.
                     small = cv.resize(self.img, (0, 0), fx=0.5, fy=0.5) # Takes image and scales it to *0.5
                     hp = cv.resize(self.img_health, (0, 0), fx=3, fy=3)
-                    rgb_model = RgbModel(114, 145, 30, 57, 27, 57)
 
-                    cv.putText(small, "Health: " + str(rgb_match(self.formatted_img_health, rgb_model)), (25, 100), cv.FONT_HERSHEY_PLAIN, 5, (0, 0, 255), 3, cv.LINE_AA)
+                    if hp < self.settings['triggerValue']:
+                        #pyautogui.press(self.settings['targetKeyCap'])
+                        frequency = 2500  # Set Frequency To 2500 Hertz
+                        duration = 10  # Set Duration To 1000 ms == 1 second
+                        winsound.Beep(frequency, duration)
+
+                    rgb_model = RgbModel(114, 145, 30, 57, 27, 57)
+                    hp = rgb_match(self.formatted_img_health, rgb_model)
+                    cv.putText(small, "Health: " + str(hp), (25, 100), cv.FONT_HERSHEY_PLAIN, 5, (0, 0, 255), 3, cv.LINE_AA)
                     cv.imshow('Computer vision', small) # Shows screenshot in small desktop window
                     cv.imshow("Health bar", hp)
 
-                cv.waitKey(1)  # Zero parameter waits for any key. It's like pause button. 1 is a 1 ms delay. Every 1 ms it check if any key is pressed.
+                cv.waitKey(self.settings['monitoringThresholdMs'])  # Zero parameter waits for any key. It's like pause button. 1 is a 1 ms delay. Every 1 ms it check if any key is pressed.
 
 # cv.destroyAllWindows() # Closes all .imshow() windows
