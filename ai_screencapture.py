@@ -1,4 +1,3 @@
-# video seria: https://www.youtube.com/watch?v=giuzj-EPOVc&t=138s
 import mss
 import pyautogui
 import cv2 as cv
@@ -15,8 +14,8 @@ class ScreenCaptureAgent:
         self.capture_process = None # Created process will be stored here. Get access to it form and outside of this class
         self.fps = None
         self.enable_cv_preview = True
-        self.top_left = (3314, 1910)
-        self.bottom_right = (3697, 1918)
+        self.top_left = (3320, 1910)
+        self.bottom_right = (3690, 1918)
         self.w, self.h = pyautogui.size() #current screen resolution
         self.monitor = { "top": 0, "left": 0, "width": self.w, "height": self.h } #monitor coordinates from (0,0)
 
@@ -33,20 +32,22 @@ class ScreenCaptureAgent:
                     self.top_left[1]:self.bottom_right[1],
                     self.top_left[0]:self.bottom_right[0]
                 ]
-                self.img_health_HSV = cv.cvtColor(self.img_health, cv.COLOR_BGR2HSV)
+                # self.img_health_HSV = cv.cvtColor(self.img_health, cv.COLOR_BGR2HSV)
+                self.img_health_HSV = cv.cvtColor(self.img_health, cv.COLOR_BGR2RGB)
 
                 if self.enable_cv_preview:
                     # Convert from rgb to bgr. Looks like for sct.grab(monitor). Apps in bgr, method in rgb.
                     small = cv.resize(self.img, (0, 0), fx=0.5, fy=0.5) # Takes image and scales it to *0.5
+                    hp = cv.resize(self.img_health, (0, 0), fx=3, fy=3)
 
                     if self.fps is None:
                         fps_text = ""
                     else:
                         fps_text = f"FPS: {self.fps:.2f}"
                     cv.putText(small, fps_text, (25, 50), cv.FONT_HERSHEY_PLAIN, 1, (255, 0, 255), 1, cv.LINE_AA)
-                    cv.putText(small, "Health: " + str(hue_match_pct(self.img_health_HSV, 0, 10)), (25, 100), cv.FONT_HERSHEY_PLAIN, 1, (0, 0, 255), 1, cv.LINE_AA)
+                    cv.putText(small, "Health: " + str(hue_match_pct(self.img_health_HSV, 0, 12)), (25, 100), cv.FONT_HERSHEY_PLAIN, 5, (0, 0, 255), 3, cv.LINE_AA)
                     cv.imshow('Computer vision', small) # Shows screenshot in small desktop window
-                    cv.imshow("Health bar", self.img_health)
+                    cv.imshow("Health bar", hp)
 
                 elapsed_time = time.time() - fps_report_time # Total time elapsed since we started program.
 
@@ -80,7 +81,8 @@ def hue_match_pct(img, hue_low, hue_high):
     no_match_pixels = 0
     for pixel in img:
         for h, s, v in pixel:
-            if convert_hue(hue_low) <= h <= convert_hue(hue_high): # убрать convert_hue
+            # if convert_hue(hue_low) <= h <= convert_hue(hue_high):  # убрать convert_hue
+            if 114 <= h <= 145 and 30 <= s <= 57 and 27 <= v <= 57:
                 match_pixels += 1
             else:
                 no_match_pixels += 1
@@ -88,15 +90,12 @@ def hue_match_pct(img, hue_low, hue_high):
     total_pixels = match_pixels + no_match_pixels
     return np.round(match_pixels / total_pixels, 2) * 100
 
+
 def print_menu():
     print(f'{bcolors.CYAN}Command menu{bcolors.ENDC}')
     print(f'\t{bcolors.GREEN}r - run{bcolors.ENDC} \tStart screen capture')
     print(f'\t{bcolors.RED}s - stop{bcolors.ENDC} \tStop screen capture')
     print(f'\tq - quit \tQuit the program')
-
-
-def f():
-    print(1)
 
 
 if __name__ == "__main__":
@@ -119,7 +118,7 @@ if __name__ == "__main__":
                 args=(),
                 name="screen capture process"
             )
-            screen_agent.capture_process.start() # не работает 28:30
+            screen_agent.capture_process.start()
             screen_agent.capture_process.join(1)
         elif user_input == 'stop' or user_input == 's':
             if screen_agent.capture_process is None:
