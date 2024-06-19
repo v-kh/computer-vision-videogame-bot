@@ -16,7 +16,9 @@ if __name__ == "__main__":
 
     while True:
         print_menu()
+
         user_input = input().strip().lower()
+
         if user_input == 'quit' or user_input == 'q':
             if screen_agent.capture_process is not None:
                 screen_agent.capture_process.terminate()
