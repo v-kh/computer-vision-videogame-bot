@@ -36,7 +36,7 @@ if __name__ == "__main__":
                 name="screen capture process"
             )
             screen_agent.capture_process.start()
-            screen_agent.capture_process.join(1)
+            screen_agent.capture_process.join()
         elif user_input == UserInputs.STOP_COMMAND or user_input == UserInputs.STOP_KEY:
             if screen_agent.capture_process is None:
                 print(f'{Colors.YELLOW}WARNING:{Colors.DEFAULT} Capture process is not running.')
