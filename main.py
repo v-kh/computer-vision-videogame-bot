@@ -1,5 +1,6 @@
 import multiprocessing
-from colors import Colors
+
+from constants.colors import Colors
 from screen_capture_agent import ScreenCaptureAgent
 
 
