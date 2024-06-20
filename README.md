@@ -15,3 +15,8 @@ This interval mode is created for areas with opacity, which can change color a l
 - `triggerValueLow` (int) and `triggerValueHigh` (int) Low and high values of interval, where event is triggered and bot will press specified button. For example, if low value is 2 and high is 70 - keyboard button will be pressed if hp is between 2% and 70%.
 Low value is used to prevent useless event trigering on loading screens, for example, where prefered area for monitoring is not shown.
 - `triggerInterval` (int) Time interval in milliseconds between bot actions. For example, if first aid kit in your videogame takes 5 seconds for usage, there is no need for bot triggering in 5 seconds after last trigger even if event triggering conditions are suitable.
+
+  Example of bot in action:
+
+  ![Screenshot_2 — копия](https://github.com/v-kh/computer-vision-bot/assets/48645144/a85777e5-1f43-4e33-b2bf-c00baec0945e)
+
