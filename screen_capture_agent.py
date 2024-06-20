@@ -46,7 +46,9 @@ class ScreenCaptureAgent:
                     self.top_left[0]:self.bottom_right[0]
                ]
 
-                self.formatted_target_area = cv.cvtColor(self.target_area, cv.COLOR_BGR2RGB) if self.is_rgb_mode_selected else cv.cvtColor(self.target_area, cv.COLOR_BGR2HSV)
+                # DEPRECATED: HSV color model will probably be deleted
+                # self.formatted_target_area = cv.cvtColor(self.target_area, cv.COLOR_BGR2RGB) if self.is_rgb_mode_selected else cv.cvtColor(self.target_area, cv.COLOR_BGR2HSV)
+                self.formatted_target_area = cv.cvtColor(self.target_area, cv.COLOR_BGR2RGB)
                 rgb_model = RgbModel(105, 145, 23, 57, 23, 57)
                 hp = rgb_match(self.formatted_target_area, rgb_model)
                 current_time = time.time()
