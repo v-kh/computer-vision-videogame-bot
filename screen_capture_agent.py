@@ -27,7 +27,12 @@ class ScreenCaptureAgent:
         self.is_cv_preview_enabled = self.settings['isCvPreviewEnabled']
         self.top_left = (self.settings['monitoringAreaCoordinates']['topLeftX'], self.settings['monitoringAreaCoordinates']['topLeftY'])
         self.bottom_right = (self.settings['monitoringAreaCoordinates']['bottomRightX'], self.settings['monitoringAreaCoordinates']['bottomRightY'])
-        self.is_rgb_mode_selected = self.settings['isRgbModeSelected']
+        self.r_low = self.settings['monitoringAreaColorRgb']['rLow']
+        self.r_high = self.settings['monitoringAreaColorRgb']['rHigh']
+        self.g_low = self.settings['monitoringAreaColorRgb']['gLow']
+        self.g_high = self.settings['monitoringAreaColorRgb']['gHigh']
+        self.b_low = self.settings['monitoringAreaColorRgb']['bLow']
+        self.b_high = self.settings['monitoringAreaColorRgb']['bHigh']
         self.trigger_value_low = self.settings['triggerValueLow']
         self.trigger_value_high = self.settings['triggerValueHigh']
         self.trigger_interval = self.settings['triggerInterval']
@@ -49,7 +54,7 @@ class ScreenCaptureAgent:
                 # DEPRECATED: HSV color model will probably be deleted
                 # self.formatted_target_area = cv.cvtColor(self.target_area, cv.COLOR_BGR2RGB) if self.is_rgb_mode_selected else cv.cvtColor(self.target_area, cv.COLOR_BGR2HSV)
                 self.formatted_target_area = cv.cvtColor(self.target_area, cv.COLOR_BGR2RGB)
-                rgb_model = RgbModel(105, 145, 23, 57, 23, 57)
+                rgb_model = RgbModel(self.r_low, self.r_high, self.g_low, self.g_high, self.b_low, self.b_high)
                 hp = rgb_match(self.formatted_target_area, rgb_model)
                 current_time = time.time()
                 time_elapsed = current_time - self.time
@@ -66,11 +71,11 @@ class ScreenCaptureAgent:
                     # Convert from rgb to bgr. Looks like for sct.grab(monitor). Apps in bgr, method in rgb.
                     #main_monitor = cv.resize(self.img, (0, 0), fx=0.5, fy=0.5) # Takes image and scales it to *0.5
                     # main_monitor_window_name = "Computer vision"
-                    hp_monitor = cv.resize(self.target_area, (0, 0), fx=3, fy=30)
+                    hp_monitor = cv.resize(self.target_area, (0, 0), fx=2, fy=10)
                     health_bar_window_name = "Health bar"
 
-                    cv.putText(hp_monitor, "Health: " + str(hp), (25, 100), cv.FONT_HERSHEY_PLAIN, 5, (0, 0, 255), 3, cv.LINE_AA)
-                    cv.putText(hp_monitor, "Power: ON", (620, 100), cv.FONT_HERSHEY_PLAIN, 5, (250, 160, 120), 3, cv.LINE_4) # color param is in BGR
+                    cv.putText(hp_monitor, "Health: " + str(hp), (25, 45), cv.FONT_HERSHEY_PLAIN, 3, (0, 0, 255), 3, cv.LINE_AA)
+                    cv.putText(hp_monitor, "Power: ON", (400, 45), cv.FONT_HERSHEY_PLAIN, 3, (250, 160, 120), 3, cv.LINE_4) # color param is in BGR
                     #cv.imshow(main_monitor_window_name, main_monitor) # Shows screenshot in small desktop window
                     cv.imshow(health_bar_window_name, hp_monitor)
                     cv.setWindowProperty(health_bar_window_name, cv.WND_PROP_TOPMOST, 1)
