@@ -1,4 +1,5 @@
 import json
+import time
 import mss
 import pyautogui
 import cv2 as cv
@@ -16,6 +17,7 @@ class ScreenCaptureAgent:
         self.settings = json.load(f)
         f.close()
 
+        self.time = time.time()
         self.img = None
         self.img_health = None
         self.formatted_img_health = None
@@ -28,6 +30,7 @@ class ScreenCaptureAgent:
 
     def capture_screen(self):
         with mss.mss() as sct:
+            print(self.settings['triggerInterval'])
             while True:
                 self.img = sct.grab(self.monitor)  # ct is "screenshot". It takes a screenshot with monitor coordinates and size. Saves scr in memory.
                 self.img = np.array(self.img)  # Converts screenshot to array for opencv.
@@ -39,13 +42,18 @@ class ScreenCaptureAgent:
                 self.formatted_img_health = cv.cvtColor(self.img_health, cv.COLOR_BGR2RGB) if self.settings['isRgbModeSelected'] else cv.cvtColor(self.img_health, cv.COLOR_BGR2HSV)
                 rgb_model = RgbModel(105, 145, 23, 57, 23, 57)
                 hp = rgb_match(self.formatted_img_health, rgb_model)
-                trigger_value = self.settings['triggerValue']
+                trigger_value_low = self.settings['triggerValueLow']
+                trigger_value_high = self.settings['triggerValueHigh']
+                current_time = time.time()
+                time_elapsed = current_time - self.time
 
-                if hp < trigger_value:
-                    #pyautogui.press(self.settings['targetKeyCap'])
-                    frequency = 2500  # Set Frequency To 2500 Hertz
-                    duration = 10  # Set Duration To 1000 ms == 1 second
-                    winsound.Beep(frequency, duration)
+                if trigger_value_low < hp < trigger_value_high and self.settings['isDebugMode']:
+                    winsound.Beep(frequency = 2500, duration = 10)
+                    print("Event triggered")
+
+                if trigger_value_low < hp < trigger_value_high and time_elapsed > self.settings['triggerInterval'] and not self.settings['isDebugMode']:
+                    self.time = time.time()
+                    pyautogui.press(self.settings['targetKeyCap'])
 
                 if self.enable_cv_preview:
                     # Convert from rgb to bgr. Looks like for sct.grab(monitor). Apps in bgr, method in rgb.
