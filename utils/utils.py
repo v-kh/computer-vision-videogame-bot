@@ -7,8 +7,8 @@ from constants.scale_units import ScaleUnits
 def convert_hue(hue):
     default_ratio = 361
     opencv_ratio = 180
-
     ratio = default_ratio / opencv_ratio
+
     return np.round(hue / ratio, ScaleUnits.TWO)
 
 
