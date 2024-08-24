@@ -18,5 +18,6 @@ Low value is used to prevent useless event trigering on loading screens, for exa
 
   Example of bot in action:
 
-  ![Screenshot_2 — копия](https://github.com/v-kh/computer-vision-bot/assets/48645144/a85777e5-1f43-4e33-b2bf-c00baec0945e)
+![HealthBar](https://github.com/v-kh/computer-vision-videogame-bot/assets/48645144/9428f5a6-81e3-4a28-aa7a-3dd258f76f9b)
+
 
