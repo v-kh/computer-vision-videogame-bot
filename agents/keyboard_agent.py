@@ -1,4 +1,6 @@
 import json
+
+from agents.settings_agent import SettingsAgent
 from pynput import keyboard
 import winsound
 
@@ -15,7 +17,7 @@ class KeyboardAgent:
         def on_keyboard_click(key):
             if key.char == self.activate_macros_key_cap:
                 winsound.Beep(frequency=2500, duration=10)
-                #self.is_activated = not self.is_activated
+                SettingsAgent.is_mouse_macros_activated = not SettingsAgent.is_mouse_macros_activated
 
         keyboard_listener = keyboard.Listener(on_press=on_keyboard_click)
         keyboard_listener.start()
