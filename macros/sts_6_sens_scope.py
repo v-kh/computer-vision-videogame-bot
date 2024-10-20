@@ -1,5 +1,8 @@
 import time
-import pyautogui
+from ctypes import windll
+
+import winsound
+
 from agents.settings_agent import SettingsAgent
 
 
@@ -10,54 +13,56 @@ class Sts6SensScope:
             if not SettingsAgent.is_button_held:
                 return
 
-            pyautogui.moveRel(0, 15)
+            windll.user32.mouse_event(1, 0, 15, 0, 0)
             time.sleep(0.022)
 
         for x in range(4):
             if not SettingsAgent.is_button_held:
                 return
 
-            pyautogui.moveRel(0, 12)
+            windll.user32.mouse_event(1, 0, 12, 0, 0)
             time.sleep(0.022)
 
-        for x in range(46):
+        for x in range(23):
             if not SettingsAgent.is_button_held:
                 return
 
-            pyautogui.moveRel(0, 7)
+            windll.user32.mouse_event(1, 0, 7, 0, 0)
             time.sleep(0.022)
 
-        for x in range(12):
+        for x in range(8):
             if not SettingsAgent.is_button_held:
                 return
 
-            pyautogui.moveRel(0, 12)
+            windll.user32.mouse_event(1, 0, 12, 0, 0)
             time.sleep(0.022)
 
-        for x in range(38):
+        for x in range(19):
             if not SettingsAgent.is_button_held:
                 return
 
-            pyautogui.moveRel(0, 10)
+            windll.user32.mouse_event(1, 0, 10, 0, 0)
             time.sleep(0.025)
 
-        for x in range(34):
+        for x in range(17):
             if not SettingsAgent.is_button_held:
                 return
 
-            pyautogui.moveRel(0, 15)
+            windll.user32.mouse_event(1, 0, 15, 0, 0)
             time.sleep(0.025)
 
-        for x in range(22):
+        for x in range(11):
             if not SettingsAgent.is_button_held:
                 return
 
-            pyautogui.moveRel(0, 13)
+            windll.user32.mouse_event(1, 0, 13, 0, 0)
             time.sleep(0.025)
 
-        for x in range(54):
+        for x in range(27):
             if not SettingsAgent.is_button_held:
                 return
 
-            pyautogui.moveRel(0, 15)
+            windll.user32.mouse_event(1, 0, 15, 0, 0)
             time.sleep(0.025)
+
+        #insound.Beep(frequency=2500, duration=10)

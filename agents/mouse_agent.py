@@ -11,9 +11,8 @@ class MouseAgent:
 
     def start_mouse_macros(self):
         def on_mouse_click(x, y, button, pressed):
-            if button == mouse.Button.right:
+            if button == mouse.Button.left:
                 SettingsAgent.is_button_held = pressed
-
 
         with mouse.Listener(on_click=on_mouse_click) as mouse_listener:
             print("Listening for mouse events. Press Ctrl+C to stop.")
