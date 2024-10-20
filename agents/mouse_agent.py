@@ -1,28 +1,13 @@
-import json
-from pynput import mouse, keyboard
+from pynput import mouse
 import time
-import winsound
 
-class MouseMacrosAgent:
+class MouseAgent:
     def __init__(self) -> None:
-        f = open('./appsettings.json')
-        self.settings = json.load(f)
-        f.close()
-
-        self.activate_macros_key_cap = self.settings['activateMacrosKeyCap']
-
         self.capture_process = None
         self.is_activated = True
         self.is_button_held = False
 
     def start_mouse_macros(self):
-        def on_keyboard_click(key):
-            if key == keyboard.Key.up:
-                winsound.Beep(frequency=2500, duration=10)
-                self.is_activated = not self.is_activated
-
-        keyboard_listener = keyboard.Listener(on_press=on_keyboard_click) # Если привести к вид как у mouse_listener, он как-то начинает работать.
-
         def on_mouse_click(x, y, button, pressed):
             if button == mouse.Button.right:
                 self.is_button_held = pressed
@@ -44,5 +29,4 @@ class MouseMacrosAgent:
                 print("Stopped listening.")
                 mouse_listener.stop()
 
-        keyboard_listener.join()
         mouse_listener.join()
