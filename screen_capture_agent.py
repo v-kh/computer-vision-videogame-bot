@@ -11,13 +11,13 @@ from Models.rgb_model import RgbModel
 from constants.default_values import DefaultValues
 from utils.utils import rgb_match
 
-is_button_held = False
-
 class ScreenCaptureAgent:
     def __init__(self) -> None:
         f = open('appsettings.json')
         self.settings = json.load(f)
         f.close()
+
+        self.is_button_held = False
 
         self.time = time.time()
         self.full_monitor = None
@@ -44,9 +44,8 @@ class ScreenCaptureAgent:
 
     def capture_screen(self):
         def on_click(x, y, button, pressed):
-            global is_button_held
             if button == mouse.Button.right:  # Check for the left mouse button
-                is_button_held = pressed
+                self.is_button_held = pressed
                 if pressed:
                     print("Right mouse button pressed.")
                 else:
@@ -57,13 +56,13 @@ class ScreenCaptureAgent:
             print("Listening for mouse events. Press Ctrl+C to stop.")
             try:
                 while True:
-                    global is_button_held
-                    if is_button_held:
+                    if self.is_button_held:
                         print("Right mouse button is being held down.")
                     time.sleep(0.1)  # Check every 100 ms
             except KeyboardInterrupt:
                 print("Stopped listening.")
                 listener.stop()
+
         # sct is "screenshot". It takes a screenshot with monitor coordinates and size. Saves sct in memory.
         with mss.mss() as sct:
             while True:
