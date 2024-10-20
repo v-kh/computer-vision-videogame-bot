@@ -1,6 +1,7 @@
 class SettingsAgent(object):
     _instance = None
     is_mouse_macros_activated = False
+    is_button_held = False
 
     def __init__(self):
         raise RuntimeError('Call instance() instead')

@@ -36,23 +36,9 @@ if __name__ == "__main__":
                 print(f'{Colors.YELLOW}WARNING:{Colors.DEFAULT} Processes are running.')
                 continue
 
-            screen_agent.capture_process = Thread(
-                target=screen_agent.capture_screen,
-                args=(),
-                name="screen capture process"
-            )
-
-            mouse_agent.capture_process = Thread(
-                target=mouse_agent.start_mouse_macros,
-                args=(),
-                name="mouse macros process"
-            )
-
-            keyboard_agent.capture_process = Thread(
-                target=keyboard_agent.start_keyboard_listening,
-                args=(),
-                name="keyboard listening process"
-            )
+            screen_agent.capture_process = Thread(target=screen_agent.capture_screen, args=(), name="screen capture process")
+            mouse_agent.capture_process = Thread(target=mouse_agent.start_mouse_macros, args=(), name="mouse macros process")
+            keyboard_agent.capture_process = Thread(target=keyboard_agent.start_keyboard_listening, args=(), name="keyboard listening process")
 
             screen_agent.capture_process.start()
             mouse_agent.capture_process.start()
