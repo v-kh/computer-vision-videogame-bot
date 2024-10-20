@@ -45,7 +45,6 @@ class ScreenCaptureAgent:
     def capture_screen(self):
         def on_click(x, y, button, pressed):
             global is_button_held
-            is_button_held = pressed
             if button == mouse.Button.right:  # Check for the left mouse button
                 is_button_held = pressed
                 if pressed:
