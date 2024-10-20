@@ -5,11 +5,13 @@ import pyautogui
 import cv2 as cv
 import numpy as np
 import winsound
+from pynput import mouse
 
 from Models.rgb_model import RgbModel
 from constants.default_values import DefaultValues
 from utils.utils import rgb_match
 
+is_button_held = False
 
 class ScreenCaptureAgent:
     def __init__(self) -> None:
@@ -41,6 +43,28 @@ class ScreenCaptureAgent:
         self.monitor_dimensions = {"top": DefaultValues.DEFAULT_VALUE, "left": DefaultValues.DEFAULT_VALUE, "width": self.w, "height": self.h}
 
     def capture_screen(self):
+        def on_click(x, y, button, pressed):
+            global is_button_held
+            is_button_held = pressed
+            if button == mouse.Button.right:  # Check for the left mouse button
+                is_button_held = pressed
+                if pressed:
+                    print("Right mouse button pressed.")
+                else:
+                    print("Right mouse button released.")
+
+        # Set up the listener
+        with mouse.Listener(on_click=on_click) as listener:
+            print("Listening for mouse events. Press Ctrl+C to stop.")
+            try:
+                while True:
+                    global is_button_held
+                    if is_button_held:
+                        print("Right mouse button is being held down.")
+                    time.sleep(0.1)  # Check every 100 ms
+            except KeyboardInterrupt:
+                print("Stopped listening.")
+                listener.stop()
         # sct is "screenshot". It takes a screenshot with monitor coordinates and size. Saves sct in memory.
         with mss.mss() as sct:
             while True:
