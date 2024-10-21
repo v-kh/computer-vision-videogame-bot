@@ -6,6 +6,9 @@ from agents.settings_agent import SettingsAgent
 class Sts6SensHeap:
     @staticmethod
     def exec_macros():
+        '''Mouse macros for STS gun is StalCraft video game.
+        For win 3840x2160 with 150% percent view.
+        StalCraft is in full windowed mode. For shooting without scope'''
         for x in range(4):
             if not SettingsAgent.is_left_mouse_held:
                 return
