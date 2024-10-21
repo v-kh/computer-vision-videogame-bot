@@ -45,21 +45,21 @@ class Sts6SensScope:
             if not SettingsAgent.is_left_mouse_held:
                 return
 
-            windll.user32.mouse_event(1, 0, 16, 0, 0)
+            windll.user32.mouse_event(1, 0, 14, 0, 0)
             time.sleep(0.025)
 
         for x in range(11):
             if not SettingsAgent.is_left_mouse_held:
                 return
 
-            windll.user32.mouse_event(1, 0, 17, 0, 0)
+            windll.user32.mouse_event(1, 0, 16, 0, 0)
             time.sleep(0.025)
 
         for x in range(12):
             if not SettingsAgent.is_left_mouse_held:
                 return
 
-            windll.user32.mouse_event(1, 0, 17, 0, 0)
+            windll.user32.mouse_event(1, 0, 16, 0, 0)
             time.sleep(0.025)
 
         for x in range(15):

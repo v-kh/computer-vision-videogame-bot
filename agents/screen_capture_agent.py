@@ -4,7 +4,10 @@ import mss
 import pyautogui
 import cv2 as cv
 import numpy as np
+import pydirectinput
 import winsound
+
+from agents.settings_agent import SettingsAgent
 from models.rgb_model import RgbModel
 from constants.default_values import DefaultValues
 from utils.utils import rgb_match
@@ -63,7 +66,7 @@ class ScreenCaptureAgent:
 
                 if self.trigger_value_low < hp < self.trigger_value_high and time_elapsed > self.trigger_interval and not self.isDebugMode:
                     self.time = time.time()
-                    pyautogui.press(self.target_key_cap)
+                    pydirectinput.press(self.target_key_cap)
 
                 if self.is_cv_preview_enabled:
                     # Convert from rgb to bgr. Looks like for sct.grab(monitor). Apps in bgr, method in rgb.
@@ -73,7 +76,7 @@ class ScreenCaptureAgent:
                     health_bar_window_name = "Health bar"
 
                     cv.putText(hp_monitor, "Health: " + str(hp), (25, 45), cv.FONT_HERSHEY_PLAIN, 3, (0, 0, 255), 3, cv.LINE_AA)
-                    cv.putText(hp_monitor, "Power: ON", (400, 45), cv.FONT_HERSHEY_PLAIN, 3, (250, 160, 120), 3, cv.LINE_4) # color param is in BGR
+                    cv.putText(hp_monitor, f"Macros: {("ON" if SettingsAgent.is_mouse_macros_activated else "OFF")}", (400, 45), cv.FONT_HERSHEY_PLAIN, 3, (250, 160, 120), 3, cv.LINE_4) # color param is in BGR
                     #cv.imshow(main_monitor_window_name, main_monitor) # Shows screenshot in small desktop window
                     cv.imshow(health_bar_window_name, hp_monitor)
                     cv.setWindowProperty(health_bar_window_name, cv.WND_PROP_TOPMOST, 1)
