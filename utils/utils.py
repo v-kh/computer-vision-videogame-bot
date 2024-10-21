@@ -1,5 +1,4 @@
 import numpy as np
-
 from constants.default_values import DefaultValues
 from constants.scale_units import ScaleUnits
 

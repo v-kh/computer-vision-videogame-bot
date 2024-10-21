@@ -1,5 +1,4 @@
 import json
-
 from playsound import playsound # exactly pip install playsound==1.2.2
 from pynput import keyboard
 
@@ -16,7 +15,6 @@ class KeyboardAgent:
 
     def start_keyboard_listening(self):
         def on_keyboard_click(key):
-            #if key.char and key.char == self.activate_macros_key_cap:
             try:
                 if key.char and key.char == self.activate_macros_key_cap:
                     if SettingsAgent.is_mouse_macros_activated:

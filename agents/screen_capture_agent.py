@@ -5,7 +5,6 @@ import pyautogui
 import cv2 as cv
 import numpy as np
 import winsound
-
 from models.rgb_model import RgbModel
 from constants.default_values import DefaultValues
 from utils.utils import rgb_match
