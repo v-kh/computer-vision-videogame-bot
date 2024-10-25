@@ -1,6 +1,6 @@
 from agents.settings_agent import SettingsAgent
-from macros.sts_6_sens_heap import Sts6SensHeap
-from macros.sts_6_sens_scope import Sts6SensScope
+from macros.QBZ_5_sens_heap import QBZ5SensHeap
+from macros.QBZ_6_sens_scope import QBZ6SensScope
 from pynput import mouse
 import time
 
@@ -25,9 +25,9 @@ class MouseAgent:
                 while True:
                     if SettingsAgent.is_mouse_macros_activated:
                         if SettingsAgent.is_left_mouse_held and SettingsAgent.is_right_mouse_held:
-                            Sts6SensScope.exec_macros()
+                            QBZ6SensScope.exec_macros()
                         if SettingsAgent.is_left_mouse_held and not SettingsAgent.is_right_mouse_held:
-                            Sts6SensHeap.exec_macros()
+                            QBZ5SensHeap.exec_macros()
                     time.sleep(0.1)  # Check every 100 ms
             except KeyboardInterrupt:
                 print("Stopped listening.")

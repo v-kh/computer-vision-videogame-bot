@@ -7,9 +7,16 @@ class Sts6SensScope:
     @staticmethod
     def exec_macros():
         '''Mouse macros for STS gun is StalCraft video game.
-        For win 3840x2160 with 150% percent view.
+        For win 3840x2160 with 150% percent view, mouse sensitivity 6.
         StalCraft is in full windowed mode. For shooting in 2x scope.'''
-        for x in range(4):
+        for x in range(2):
+            if not SettingsAgent.is_left_mouse_held:
+                return
+
+            windll.user32.mouse_event(1, 0, 24, 0, 0)
+            time.sleep(0.022)
+
+        for x in range(2):
             if not SettingsAgent.is_left_mouse_held:
                 return
 
