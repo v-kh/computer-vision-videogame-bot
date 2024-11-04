@@ -3,7 +3,7 @@ from ctypes import windll
 from agents.settings_agent import SettingsAgent
 
 
-class Sts6SensHeap:
+class Sts5SensHeap:
     @staticmethod
     def exec_macros():
         '''Mouse macros for STS gun is StalCraft video game.
