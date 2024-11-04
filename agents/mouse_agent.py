@@ -28,7 +28,7 @@ class MouseAgent:
                             QBZ6SensScope.exec_macros()
                         if SettingsAgent.is_left_mouse_held and not SettingsAgent.is_right_mouse_held:
                             QBZ5SensHeap.exec_macros()
-                    time.sleep(0.1)  # Check every 100 ms
+                    time.sleep(0.1)
             except KeyboardInterrupt:
                 print("Stopped listening.")
                 mouse_listener.stop()

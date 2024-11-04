@@ -1,8 +1,6 @@
 import time
 from ctypes import windll
 
-import winsound
-
 from agents.settings_agent import SettingsAgent
 
 
@@ -13,7 +11,7 @@ class QBZ5SensHeap:
         For win 3840x2160 with 150% percent view, mouse sensitivity 5.
         StalCraft is in full windowed mode. For shooting without scope'''
         for x in range(10):
-            if not SettingsAgent.is_left_mouse_held: # Это 4 патрона
+            if not SettingsAgent.is_left_mouse_held:
                 return
 
             windll.user32.mouse_event(1, 0, 5, 0, 0)
@@ -53,5 +51,3 @@ class QBZ5SensHeap:
 
             windll.user32.mouse_event(1, 0, 7, 0, 0)
             time.sleep(0.022)
-
-        #winsound.Beep(frequency=2500, duration=10)
