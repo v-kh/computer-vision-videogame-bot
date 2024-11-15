@@ -24,14 +24,7 @@ class QBZ5SensHeap:
             windll.user32.mouse_event(1, 0, 4, 0, 0)
             time.sleep(0.022)
 
-        for x in range(15):
-            if not SettingsAgent.is_left_mouse_held:
-                return
-
-            windll.user32.mouse_event(1, 0, 5, 0, 0)
-            time.sleep(0.022)
-
-        for x in range(15):
+        for x in range(30):
             if not SettingsAgent.is_left_mouse_held:
                 return
 

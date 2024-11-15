@@ -1,6 +1,6 @@
 from agents.settings_agent import SettingsAgent
 from macros.QBZ_5_sens_heap import QBZ5SensHeap
-from macros.QBZ_6_sens_scope import QBZ6SensScope
+from macros.QBZ_6_sens_scope import QBZ5SensScope
 from pynput import mouse
 import time
 
@@ -25,7 +25,7 @@ class MouseAgent:
                 while True:
                     if SettingsAgent.is_mouse_macros_activated:
                         if SettingsAgent.is_left_mouse_held and SettingsAgent.is_right_mouse_held:
-                            QBZ6SensScope.exec_macros()
+                            QBZ5SensScope.exec_macros()
                         if SettingsAgent.is_left_mouse_held and not SettingsAgent.is_right_mouse_held:
                             QBZ5SensHeap.exec_macros()
                     time.sleep(0.1)
