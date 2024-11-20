@@ -8,7 +8,7 @@ class QBZ5Sens:
     @staticmethod
     def exec_macros(scope_multiplier):
         '''Mouse macros for QBZ gun in StalCraft video game.
-        For win 3840x2160 with 150% percent view, mouse sensitivity 6.
+        For win 3840x2160 with 150% percent view, mouse sensitivity 5.
         StalCraft is in full windowed mode.'''
         for x in range(2):
             if not SettingsAgent.is_left_mouse_held:
