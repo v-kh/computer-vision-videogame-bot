@@ -1,4 +1,3 @@
-import math
 import time
 from ctypes import windll
 from agents.settings_agent import SettingsAgent
