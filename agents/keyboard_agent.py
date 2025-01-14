@@ -10,7 +10,7 @@ class KeyboardAgent:
         self.settings = json.load(f)
         f.close()
 
-        self.activate_macros_key_cap = f'{self.settings['activateMacrosKeyCap']}'
+        self.activate_macros_key_cap = f'{self.settings["activateMacrosKeyCap"]}'
         self.capture_process = None
 
     def start_keyboard_listening(self):

@@ -6,6 +6,7 @@ from constants.user_inputs import UserInputs
 from agents.screen_capture_agent import ScreenCaptureAgent
 from agents.mouse_agent import MouseAgent
 
+# Works well on python 3.11. Python 3.13 invokes exception in pynput.
 
 def print_menu():
     print(f'{Colors.CYAN}Command menu{Colors.DEFAULT}')

@@ -76,7 +76,7 @@ class ScreenCaptureAgent:
                     health_bar_window_name = "Health bar"
 
                     cv.putText(hp_monitor, "Health: " + str(hp), (25, 45), cv.FONT_HERSHEY_PLAIN, 3, (0, 0, 255), 3, cv.LINE_AA)
-                    cv.putText(hp_monitor, f"Macros: {("ON" if SettingsAgent.is_mouse_macros_activated else "OFF")}", (400, 45), cv.FONT_HERSHEY_PLAIN, 3, (250, 160, 120), 3, cv.LINE_4) # color param is in BGR
+                    cv.putText(hp_monitor, f"Macros: {('ON' if SettingsAgent.is_mouse_macros_activated else 'OFF')}", (400, 45), cv.FONT_HERSHEY_PLAIN, 3, (250, 160, 120), 3, cv.LINE_4) # color param is in BGR
                     #cv.imshow(main_monitor_window_name, main_monitor) # Shows screenshot in small desktop window
                     cv.imshow(health_bar_window_name, hp_monitor)
                     cv.setWindowProperty(health_bar_window_name, cv.WND_PROP_TOPMOST, 1)
