@@ -28,7 +28,7 @@ class MouseAgent:
                 while True:
                     if SettingsAgent.is_mouse_macros_activated:
                         if SettingsAgent.is_left_mouse_held and SettingsAgent.is_right_mouse_held:
-                            QBZ5Sens.exec_macros(2.4)
+                            QBZ5Sens.exec_macros(1)
                             #Mg35Sens.exec_macros(2.4)
                             #Sts5SensHeap.exec_macros(2.4)
                             #PkpPecheneg5Sens.exec_macros(2.4)
