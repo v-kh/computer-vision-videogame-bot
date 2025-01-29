@@ -23,11 +23,18 @@ class Mg35Sens:
             windll.user32.mouse_event(1, 0, round(10 * scope_multiplier), 0, 0)
             time.sleep(0.022)
 
-        for x in range(100):
+        for x in range(50):
             if not SettingsAgent.is_left_mouse_held:
                 return
 
             windll.user32.mouse_event(1, 0, round(11 * scope_multiplier), 0, 0)
+            time.sleep(0.022)
+
+        for x in range(50):
+            if not SettingsAgent.is_left_mouse_held:
+                return
+
+            windll.user32.mouse_event(1, 0, round(10 * scope_multiplier), 0, 0)
             time.sleep(0.022)
 
         for x in range(50):

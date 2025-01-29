@@ -1,4 +1,5 @@
 from agents.settings_agent import SettingsAgent
+from macros.FamasG2_5_sens import FamasG25Sens
 from macros.MG3_5_sens_heap import Mg35Sens
 from macros.PKP_Pecheneg_5_sens import PkpPecheneg5Sens
 from macros.QBZ_5_sens import QBZ5Sens
@@ -28,13 +29,15 @@ class MouseAgent:
                 while True:
                     if SettingsAgent.is_mouse_macros_activated:
                         if SettingsAgent.is_left_mouse_held and SettingsAgent.is_right_mouse_held:
-                            QBZ5Sens.exec_macros(1)
-                            #Mg35Sens.exec_macros(2.4)
+                            #QBZ5Sens.exec_macros(1)
+                            #FamasG25Sens.exec_macros(1)
+                            Mg35Sens.exec_macros(2.4)
                             #Sts5SensHeap.exec_macros(2.4)
                             #PkpPecheneg5Sens.exec_macros(2.4)
                         if SettingsAgent.is_left_mouse_held and not SettingsAgent.is_right_mouse_held:
-                            QBZ5Sens.exec_macros(1)
-                            #Mg35Sens.exec_macros(1)
+                            #QBZ5Sens.exec_macros(1)
+                            #FamasG25Sens.exec_macros(1)
+                            Mg35Sens.exec_macros(1)
                             #Sts5SensHeap.exec_macros(1)
                             #PkpPecheneg5Sens.exec_macros(1)
                     time.sleep(0.1)
