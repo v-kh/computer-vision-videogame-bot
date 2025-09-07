@@ -1,6 +1,9 @@
 ## Computer vision bot for videogames
-Watches specified area on your monitor during playing a videogame (hp bar, mana, stamina etc) and triggers if bar value falls down under specified value. 
-The only action is autopressing specified keycap on keyboard. For example, if hp becomes lower than 70%, bot will programmatically press keycap, which is used for healing.
+
+It has two main actions:
+- Watches specified area on your monitor during playing a videogame (hp bar, mana, stamina etc) and triggers if bar value falls down under specified value. 
+Autopress specified keycap on keyboard. For example, if hp becomes lower than 70%, bot will programmatically press keycap which is used for healing.
+- Allows to disable weapon recoil for first person shooter games.
 
 There are some settings which can be used to configure bot. All of them are in `appsettings.json` file:
 
